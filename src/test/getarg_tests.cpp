@@ -25,143 +25,143 @@ ResetArgs(const std::string& strArg)
 
 BOOST_AUTO_TEST_CASE(boolarg)
 {
-    ResetArgs("-foo");
-    BOOST_CHECK(GetBoolArg("-foo"));
-    BOOST_CHECK(GetBoolArg("-foo", false));
-    BOOST_CHECK(GetBoolArg("-foo", true));
+    ResetArgs("-noise");
+    BOOST_CHECK(GetBoolArg("-noise"));
+    BOOST_CHECK(GetBoolArg("-noise", false));
+    BOOST_CHECK(GetBoolArg("-noise", true));
 
     BOOST_CHECK(!GetBoolArg("-fo"));
     BOOST_CHECK(!GetBoolArg("-fo", false));
     BOOST_CHECK(GetBoolArg("-fo", true));
 
-    BOOST_CHECK(!GetBoolArg("-fooo"));
-    BOOST_CHECK(!GetBoolArg("-fooo", false));
-    BOOST_CHECK(GetBoolArg("-fooo", true));
+    BOOST_CHECK(!GetBoolArg("-noiseo"));
+    BOOST_CHECK(!GetBoolArg("-noiseo", false));
+    BOOST_CHECK(GetBoolArg("-noiseo", true));
 
-    ResetArgs("-foo=0");
-    BOOST_CHECK(!GetBoolArg("-foo"));
-    BOOST_CHECK(!GetBoolArg("-foo", false));
-    BOOST_CHECK(!GetBoolArg("-foo", true));
+    ResetArgs("-noise=0");
+    BOOST_CHECK(!GetBoolArg("-noise"));
+    BOOST_CHECK(!GetBoolArg("-noise", false));
+    BOOST_CHECK(!GetBoolArg("-noise", true));
 
-    ResetArgs("-foo=1");
-    BOOST_CHECK(GetBoolArg("-foo"));
-    BOOST_CHECK(GetBoolArg("-foo", false));
-    BOOST_CHECK(GetBoolArg("-foo", true));
+    ResetArgs("-noise=1");
+    BOOST_CHECK(GetBoolArg("-noise"));
+    BOOST_CHECK(GetBoolArg("-noise", false));
+    BOOST_CHECK(GetBoolArg("-noise", true));
 
     // New 0.6 feature: auto-map -nosomething to !-something:
-    ResetArgs("-nofoo");
-    BOOST_CHECK(!GetBoolArg("-foo"));
-    BOOST_CHECK(!GetBoolArg("-foo", false));
-    BOOST_CHECK(!GetBoolArg("-foo", true));
+    ResetArgs("-nonoise");
+    BOOST_CHECK(!GetBoolArg("-noise"));
+    BOOST_CHECK(!GetBoolArg("-noise", false));
+    BOOST_CHECK(!GetBoolArg("-noise", true));
 
-    ResetArgs("-nofoo=1");
-    BOOST_CHECK(!GetBoolArg("-foo"));
-    BOOST_CHECK(!GetBoolArg("-foo", false));
-    BOOST_CHECK(!GetBoolArg("-foo", true));
+    ResetArgs("-nonoise=1");
+    BOOST_CHECK(!GetBoolArg("-noise"));
+    BOOST_CHECK(!GetBoolArg("-noise", false));
+    BOOST_CHECK(!GetBoolArg("-noise", true));
 
-    ResetArgs("-foo -nofoo");  // -foo should win
-    BOOST_CHECK(GetBoolArg("-foo"));
-    BOOST_CHECK(GetBoolArg("-foo", false));
-    BOOST_CHECK(GetBoolArg("-foo", true));
+    ResetArgs("-noise -nonoise");  // -noise should win
+    BOOST_CHECK(GetBoolArg("-noise"));
+    BOOST_CHECK(GetBoolArg("-noise", false));
+    BOOST_CHECK(GetBoolArg("-noise", true));
 
-    ResetArgs("-foo=1 -nofoo=1");  // -foo should win
-    BOOST_CHECK(GetBoolArg("-foo"));
-    BOOST_CHECK(GetBoolArg("-foo", false));
-    BOOST_CHECK(GetBoolArg("-foo", true));
+    ResetArgs("-noise=1 -nonoise=1");  // -noise should win
+    BOOST_CHECK(GetBoolArg("-noise"));
+    BOOST_CHECK(GetBoolArg("-noise", false));
+    BOOST_CHECK(GetBoolArg("-noise", true));
 
-    ResetArgs("-foo=0 -nofoo=0");  // -foo should win
-    BOOST_CHECK(!GetBoolArg("-foo"));
-    BOOST_CHECK(!GetBoolArg("-foo", false));
-    BOOST_CHECK(!GetBoolArg("-foo", true));
+    ResetArgs("-noise=0 -nonoise=0");  // -noise should win
+    BOOST_CHECK(!GetBoolArg("-noise"));
+    BOOST_CHECK(!GetBoolArg("-noise", false));
+    BOOST_CHECK(!GetBoolArg("-noise", true));
 
     // New 0.6 feature: treat -- same as -:
-    ResetArgs("--foo=1");
-    BOOST_CHECK(GetBoolArg("-foo"));
-    BOOST_CHECK(GetBoolArg("-foo", false));
-    BOOST_CHECK(GetBoolArg("-foo", true));
+    ResetArgs("--noise=1");
+    BOOST_CHECK(GetBoolArg("-noise"));
+    BOOST_CHECK(GetBoolArg("-noise", false));
+    BOOST_CHECK(GetBoolArg("-noise", true));
 
-    ResetArgs("--nofoo=1");
-    BOOST_CHECK(!GetBoolArg("-foo"));
-    BOOST_CHECK(!GetBoolArg("-foo", false));
-    BOOST_CHECK(!GetBoolArg("-foo", true));
+    ResetArgs("--nonoise=1");
+    BOOST_CHECK(!GetBoolArg("-noise"));
+    BOOST_CHECK(!GetBoolArg("-noise", false));
+    BOOST_CHECK(!GetBoolArg("-noise", true));
 
 }
 
 BOOST_AUTO_TEST_CASE(stringarg)
 {
     ResetArgs("");
-    BOOST_CHECK_EQUAL(GetArg("-foo", ""), "");
-    BOOST_CHECK_EQUAL(GetArg("-foo", "eleven"), "eleven");
+    BOOST_CHECK_EQUAL(GetArg("-noise", ""), "");
+    BOOST_CHECK_EQUAL(GetArg("-noise", "eleven"), "eleven");
 
-    ResetArgs("-foo -bar");
-    BOOST_CHECK_EQUAL(GetArg("-foo", ""), "");
-    BOOST_CHECK_EQUAL(GetArg("-foo", "eleven"), "");
+    ResetArgs("-noise -bar");
+    BOOST_CHECK_EQUAL(GetArg("-noise", ""), "");
+    BOOST_CHECK_EQUAL(GetArg("-noise", "eleven"), "");
 
-    ResetArgs("-foo=");
-    BOOST_CHECK_EQUAL(GetArg("-foo", ""), "");
-    BOOST_CHECK_EQUAL(GetArg("-foo", "eleven"), "");
+    ResetArgs("-noise=");
+    BOOST_CHECK_EQUAL(GetArg("-noise", ""), "");
+    BOOST_CHECK_EQUAL(GetArg("-noise", "eleven"), "");
 
-    ResetArgs("-foo=11");
-    BOOST_CHECK_EQUAL(GetArg("-foo", ""), "11");
-    BOOST_CHECK_EQUAL(GetArg("-foo", "eleven"), "11");
+    ResetArgs("-noise=11");
+    BOOST_CHECK_EQUAL(GetArg("-noise", ""), "11");
+    BOOST_CHECK_EQUAL(GetArg("-noise", "eleven"), "11");
 
-    ResetArgs("-foo=eleven");
-    BOOST_CHECK_EQUAL(GetArg("-foo", ""), "eleven");
-    BOOST_CHECK_EQUAL(GetArg("-foo", "eleven"), "eleven");
+    ResetArgs("-noise=eleven");
+    BOOST_CHECK_EQUAL(GetArg("-noise", ""), "eleven");
+    BOOST_CHECK_EQUAL(GetArg("-noise", "eleven"), "eleven");
 
 }
 
 BOOST_AUTO_TEST_CASE(intarg)
 {
     ResetArgs("");
-    BOOST_CHECK_EQUAL(GetArg("-foo", 11), 11);
-    BOOST_CHECK_EQUAL(GetArg("-foo", 0), 0);
+    BOOST_CHECK_EQUAL(GetArg("-noise", 11), 11);
+    BOOST_CHECK_EQUAL(GetArg("-noise", 0), 0);
 
-    ResetArgs("-foo -bar");
-    BOOST_CHECK_EQUAL(GetArg("-foo", 11), 0);
+    ResetArgs("-noise -bar");
+    BOOST_CHECK_EQUAL(GetArg("-noise", 11), 0);
     BOOST_CHECK_EQUAL(GetArg("-bar", 11), 0);
 
-    ResetArgs("-foo=11 -bar=12");
-    BOOST_CHECK_EQUAL(GetArg("-foo", 0), 11);
+    ResetArgs("-noise=11 -bar=12");
+    BOOST_CHECK_EQUAL(GetArg("-noise", 0), 11);
     BOOST_CHECK_EQUAL(GetArg("-bar", 11), 12);
 
-    ResetArgs("-foo=NaN -bar=NotANumber");
-    BOOST_CHECK_EQUAL(GetArg("-foo", 1), 0);
+    ResetArgs("-noise=NaN -bar=NotANumber");
+    BOOST_CHECK_EQUAL(GetArg("-noise", 1), 0);
     BOOST_CHECK_EQUAL(GetArg("-bar", 11), 0);
 }
 
 BOOST_AUTO_TEST_CASE(doubledash)
 {
-    ResetArgs("--foo");
-    BOOST_CHECK_EQUAL(GetBoolArg("-foo"), true);
+    ResetArgs("--noise");
+    BOOST_CHECK_EQUAL(GetBoolArg("-noise"), true);
 
-    ResetArgs("--foo=verbose --bar=1");
-    BOOST_CHECK_EQUAL(GetArg("-foo", ""), "verbose");
+    ResetArgs("--noise=verbose --bar=1");
+    BOOST_CHECK_EQUAL(GetArg("-noise", ""), "verbose");
     BOOST_CHECK_EQUAL(GetArg("-bar", 0), 1);
 }
 
 BOOST_AUTO_TEST_CASE(boolargno)
 {
-    ResetArgs("-nofoo");
-    BOOST_CHECK(!GetBoolArg("-foo"));
-    BOOST_CHECK(!GetBoolArg("-foo", true));
-    BOOST_CHECK(!GetBoolArg("-foo", false));
+    ResetArgs("-nonoise");
+    BOOST_CHECK(!GetBoolArg("-noise"));
+    BOOST_CHECK(!GetBoolArg("-noise", true));
+    BOOST_CHECK(!GetBoolArg("-noise", false));
 
-    ResetArgs("-nofoo=1");
-    BOOST_CHECK(!GetBoolArg("-foo"));
-    BOOST_CHECK(!GetBoolArg("-foo", true));
-    BOOST_CHECK(!GetBoolArg("-foo", false));
+    ResetArgs("-nonoise=1");
+    BOOST_CHECK(!GetBoolArg("-noise"));
+    BOOST_CHECK(!GetBoolArg("-noise", true));
+    BOOST_CHECK(!GetBoolArg("-noise", false));
 
-    ResetArgs("-nofoo=0");
-    BOOST_CHECK(GetBoolArg("-foo"));
-    BOOST_CHECK(GetBoolArg("-foo", true));
-    BOOST_CHECK(GetBoolArg("-foo", false));
+    ResetArgs("-nonoise=0");
+    BOOST_CHECK(GetBoolArg("-noise"));
+    BOOST_CHECK(GetBoolArg("-noise", true));
+    BOOST_CHECK(GetBoolArg("-noise", false));
 
-    ResetArgs("-foo --nofoo");
-    BOOST_CHECK(GetBoolArg("-foo"));
+    ResetArgs("-noise --nonoise");
+    BOOST_CHECK(GetBoolArg("-noise"));
 
-    ResetArgs("-nofoo -foo"); // foo always wins:
-    BOOST_CHECK(GetBoolArg("-foo"));
+    ResetArgs("-nonoise -noise"); // noise always wins:
+    BOOST_CHECK(GetBoolArg("-noise"));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
